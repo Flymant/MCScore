@@ -45,6 +45,7 @@
     </div>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
     <script src="static/layer-v1.8.4/layer.min.js"></script>
+    <script src="static/util.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
         
@@ -92,6 +93,11 @@
             }
             
             Score.prototype.submit = function() {
+            
+                if(getCookie("if-already-give-scores") == "yes") {
+                    $(".form .info").text("You have already give your scores!");
+                    return;
+                }
                 var res = [];
                 $("#table-members tbody tr").each(function() {
                     var member = {};
@@ -120,6 +126,7 @@
                     },  
                     success: function(res) {
                         $(".form .info").text("submit success!");
+                        setCookie("if-already-give-scores", "yes", 3);
                     },
                     error: function(e) {
                         $(".form .info").text("error occurs!");
