@@ -8,4 +8,6 @@ if (!$g_connection) {
     die('Could not connect database' . mysql_error());
 }
 mysql_select_db($g_sis_config["database"], $g_connection);
+mysql_query("set names 'utf8'");
+
 ?>
